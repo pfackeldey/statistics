@@ -31,17 +31,32 @@ double mean(std::vector<double> numbers){
 
 
 double variance(std::vector<double> numbers){
-	
-	
-	return -1.;
+	double variance=0.;
+	double mean_= mean(numbers);
+	for (int i=0; i<numbers.size();i++){
+		numbers[i]=pow((numbers[i]-mean_),2.);
+	}
+	variance=mean(numbers);
+	return variance;
 	
 }
 
 
 double median(std::vector<double> numbers){
 	
+	double median =0.;
+	sort(numbers.begin(),numbers.end());
+	int length = numbers.size();
+	int middle = length/2.;
+	if ( length % 2 == 0 ){ 
+			median = (numbers.at(middle)+numbers.at(middle-1))/2.;
+		}
+	else 
+		{
+			median = numbers.at(middle);
+		}
 	
-	return -1.;
+	return median;
 	
 }
 
@@ -50,20 +65,55 @@ double mode(std::vector<double> numbers){
 	
 	// treat all numbers as ints to allow for mode calculation
 	// test all numbers between -10 and 100
-	
-	
-	return -1.;
+	sort(numbers.begin(),numbers.end());
+	int mode=0;
+	int count=0;
+	int count_old=0;
+	int value=0;
+	int rounded=0;
+	int rounded_1=0;
+	int beginner=numbers[0];
+	for(int i=0;i<numbers.size();i++){
+		rounded=numbers[i];
+		if(i==0){rounded_1=beginner;}else{rounded_1=numbers[i-1];}
+		if(rounded==rounded_1){
+			count++;
+		}else{
+			if(count>count_old){
+			value=numbers[i-1];
+			count_old=count;}
+			count=0;
+		}
+	}
+	mode=value;
+	return mode;
 }
+
 
 
 double skew(std::vector<double> numbers){
-	
-	return -1.;
+	double mean_= mean(numbers);
+	double variance_= variance(numbers);
+	double sigma = pow(variance_,1./2.);
+	double skew=0.;
+	for (int i=0; i<numbers.size();i++){
+		numbers[i]=pow(((numbers[i]-mean_)/sigma),3.);
+	}
+	skew=mean(numbers);
+	return skew;
 }
 
 double kurtosis(std::vector<double> numbers){
+	double kurtosis=0.;
+	double mean_=mean(numbers);
+	double variance_=variance(numbers);
+	double sigma = pow(variance_,1./2.);
 	
-	return -1.;
+	for (int i=0; i<numbers.size();i++){
+		numbers[i]=pow((numbers[i]-mean_)/sigma,4.);
+	}
+	kurtosis=mean(numbers);
+	return kurtosis;
 }
 
 
@@ -89,6 +139,7 @@ int main(void)
 
 	cout << "Properties of the data samle" << endl;
 	cout << "mean: " << mean(numbers) << endl;
+	cout << "variance: " << variance(numbers) << endl;
 	cout << "median: " << median(numbers) << endl;
 	cout << "mode: " << mode(numbers) << endl;
 	cout << "skew: " << skew(numbers) << endl;

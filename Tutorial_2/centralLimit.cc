@@ -32,8 +32,8 @@ int main(void)
 	TF1 *f1 = new TF1("f1","[0]*TMath::Gaus(x,[1],[2])",0,30);
 	// set parameters to the values of the generated function
 	f1->SetParameter(0,160); //maximum y-Value
-	f1->SetParameter(1,20); // mean
-	f1->SetParameter(2,5); // width	
+	f1->SetParameter(1,10); // mean
+	f1->SetParameter(2,2.5); // width	
 	
 	//create TCanvas object on which we will draw the histogram, the constructor has as arguments the name, 
 	//title, and size of canvas in x and y in number of pixels
@@ -51,11 +51,11 @@ int main(void)
 	//~ gStyle->SetOptFit(1111);
 	c1->Clear();
 	
-	TH1F *hist2 = new TH1F("hist2","hist2",30,0,30);
+	
 	TH1F *hist1 = new TH1F("hist1","hist1",30,0,30);
-	for (int k=0; k < 5; k++){
+	for (int k=0; k < 10; k++){
+		TH1F *hist2 = new TH1F("hist2","hist2",30,0,30);		
 		for (int i = 0; i < 100; i++){
-
 
 			hist2->Fill(rand->Binomial(20,0.5));
 			//hist2->Fill(rand->Poisson(10));
@@ -64,12 +64,50 @@ int main(void)
 		}
 		hist1->Add(hist2);
 	}
-	//hist2->Fit("f1");
+	hist1->Fit("f1");
 	TCanvas *c2 = new TCanvas("c2","c2",800,800);	
 	hist1->Draw();
 	
 	
-	c2->Print("c2.pdf");
+	c2->Print("CLT_binomial.pdf");
+
+	TH1F *hist3 = new TH1F("hist1","hist1",30,0,30);
+	for (int k=0; k < 10; k++){
+		TH1F *hist4 = new TH1F("hist2","hist2",30,0,30);		
+		for (int i = 0; i < 100; i++){
+
+			//hist4->Fill(rand->Binomial(20,0.5));
+			hist4->Fill(rand->Poisson(10));
+			//hist2->Fill(rand->Uniform(5,15));
+
+		}
+		hist3->Add(hist4);
+	}
+	hist3->Fit("f1");
+	TCanvas *c3 = new TCanvas("c3","c3",800,800);	
+	hist3->Draw();
+	
+	
+	c3->Print("CLT_poisson.pdf");
+
+
+	float a = 10.;
+	float b = 0.;
+	TH1F *hist5 = new TH1F("hist1","hist1",30,0,30);
+	for (int k=0; k < 20; k++){
+		float b = rand->Uniform(1,5);
+		TH1F *hist6 = new TH1F("hist2","hist2",30,0,30);		
+		for (int i = 0; i < 100; i++){
+			hist6->Fill(rand->Uniform(a-b,a+b));
+		}
+		hist5->Add(hist6);
+	}
+	hist5->Fit("f1");
+	TCanvas *c4 = new TCanvas("c4","c4",800,800);	
+	hist5->Draw();
+	
+	
+	c4->Print("CLT_uniform.pdf");
 	
   
 
@@ -136,5 +174,11 @@ Poisson	expects 1 double float (mean): virtual Int_t Poisson (Double_t mean) ###
 Uniform expects 2 double floats (x1 and x2): virtual Double_t Uniform (Double_t x1, Double_t x2) #### here: it works with an integer as variable input
 
 additional: In the plots of Binomial,Poisson and Uniform histograms one can see that some bins have large fluctuations. This is due to small amount of statistics (only 100 generated numbers). Nevertheless one can clearly see that the shape of all three distributions is following the "theory" shapes (shape with way more statistics).
+*************
+
+Task 3.c):
+
+*************
+The fit to the gaussian distribution shows that the CLT is valid for adding each pdf to itself several times.
 *************
 */

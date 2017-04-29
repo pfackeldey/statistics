@@ -50,19 +50,26 @@ int main(void)
 	
 	//~ gStyle->SetOptFit(1111);
 	c1->Clear();
-	TH1F *hist2 = new TH1F("hist2","hist2",30,0,30);
-	for (int i = 0; i < 100; i++){
-
-
-		hist2->Fill(rand->Binomial(20,0.5));
-		hist2->Fill(rand->Poisson(10));
-		hist2->Fill(rand->Uniform(5,15));
-
-	}
-	hist2->Fit("f1");
-	hist2->Draw();
 	
-	c1->Print("c2.pdf");
+	TH1F *hist2 = new TH1F("hist2","hist2",30,0,30);
+	TH1F *hist1 = new TH1F("hist1","hist1",30,0,30);
+	for (int k=0; k < 5; k++){
+		for (int i = 0; i < 100; i++){
+
+
+			hist2->Fill(rand->Binomial(20,0.5));
+			//hist2->Fill(rand->Poisson(10));
+			//hist2->Fill(rand->Uniform(5,15));
+
+		}
+		hist1->Add(hist2);
+	}
+	//hist2->Fit("f1");
+	TCanvas *c2 = new TCanvas("c2","c2",800,800);	
+	hist1->Draw();
+	
+	
+	c2->Print("c2.pdf");
 	
   
 
@@ -127,8 +134,7 @@ TRANDOM:
 Binomial expects 1 integer (n_tot) and 1 double float (probability): Int_t TRandom::Binomial (Int_t ntot,Double_t prob) 
 Poisson	expects 1 double float (mean): virtual Int_t Poisson (Double_t mean) #### here: it works with an integer as variable input
 Uniform expects 2 double floats (x1 and x2): virtual Double_t Uniform (Double_t x1, Double_t x2) #### here: it works with an integer as variable input
+
+additional: In the plots of Binomial,Poisson and Uniform histograms one can see that some bins have large fluctuations. This is due to small amount of statistics (only 100 generated numbers). Nevertheless one can clearly see that the shape of all three distributions is following the "theory" shapes (shape with way more statistics).
 *************
-
- 
-
 */

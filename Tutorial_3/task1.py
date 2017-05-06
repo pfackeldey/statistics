@@ -66,7 +66,7 @@ for i in range(1,len(xdata)-1):
 for i in range(1,len(xdata)-1):		
 	b[0]=1./3.*(xdata[1]-xdata[0])#boundary conditions	
 	b[i]=1./3.*(xdata[i+1]-xdata[i-1])
-	matrix[i-1][i+1]=b[i]
+	matrix[i-1][i-1]=b[i]
 for i in range(len(xdata)-2):
 	c[i]=1./6.*(xdata[i+1]-xdata[i])
 	matrix[i+1][i]=c[i]
@@ -74,11 +74,17 @@ for i in range(1,len(xdata)-2):
 	F[i]=(ydata[i+1]-ydata[i])/(xdata[i+1]-xdata[i])-(ydata[i]-ydata[i-1])/(xdata[i]-xdata[i-1])
 	
 matrix[0][0]=b[0]
-F[0]=0.
-F[-1]=0.
+F[0]=1.
+F[-1]=1.
 F.transpose()
-print matrix
+
+import pprint
+pprint.pprint(matrix)
 print F
+
+from numpy.linalg import inv
+
+Minv=inv(matrix) 
 	
 def cubic_interpolation(x):
 	return 0.

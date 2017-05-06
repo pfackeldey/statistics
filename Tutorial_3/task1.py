@@ -52,30 +52,31 @@ print xref
 
 yref=interpolate(xref)
 
-a=np.array([])
-b=np.array([])
-c=np.array([])
+a=np.zeros(len(xdata)-1)
+b=np.zeros(len(xdata))
+c=np.zeros(len(xdata)-1)
 F=np.array([])
 
-matrix=np.array([])
+matrix=np.zeros(len(xdata),len(xdata))
 
 #cubic interpolation
-def cubic_interpolation(x):
-	for i in range(1,len(xdata)):
-		a[i]=1./6.*(xdata[i]-xdata[i-1])
-		matrix[i][i+1]=a[i]
-	for i in range(1,len(xdata)-1):		
-		b[i]=1./3.*(xdata[i+1]-xdata[i-1])
-		matrix[i][i]=b[i]
-	for i in range(len(xdata)-1):
-		c[i]=1./6.*(xdata[i+1]-xdata[i])
-		matrix[i+1][i]=c[i]
-	for i in range(1,len(xdata)-1):
-		F[i]=(ydata[i+1]-ydata[i])/(xdata[i+1]-xdata[i])-(ydata[i]-ydata[i-1])/(xdata[i]-xdata[i-1])
-		F=np.append(F, float(F[i]))
-		F=np.transpose(F)
-	print matrix
+for i in range(1,len(xdata)):
+	a[i]=1./6.*(xdata[i]-xdata[i-1])
+	matrix[i][i+1]=a[i]
+for i in range(1,len(xdata)-1):		
+	b[i]=1./3.*(xdata[i+1]-xdata[i-1])
+	matrix[i][i]=b[i]
+for i in range(len(xdata)-1):
+	c[i]=1./6.*(xdata[i+1]-xdata[i])
+	matrix[i+1][i]=c[i]
+for i in range(1,len(xdata)-1):
+	F[i]=(ydata[i+1]-ydata[i])/(xdata[i+1]-xdata[i])-(ydata[i]-ydata[i-1])/(xdata[i]-xdata[i-1])
+	F=np.append(F, float(F[i]))
+	F=np.transpose(F)
+print matrix
 	
+def cubic_interpolation(x):
+	return 0.
 #plotting
 
 import matplotlib.pyplot as plt

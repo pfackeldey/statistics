@@ -1,5 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import numpy as np
-from scipy.interpolate import interp1d
 
 #open data
 data = open("data.txt", "r")
@@ -23,8 +25,33 @@ print ydata
 #change datatype of xdata array:
 xdata = map(np.float64, xdata)
 
+interpolation=[]
+expected=[]
+
+
 #linear interpolation
-linear_interpolation = interp1d(xdata,ydata)
+class linearinterpolation:
+	def __init__(self,x_in,y_in):
+		for i in range(len(x_in)):
+			if i==(len(x_in)-1):
+				slope=(y_in[i+1]-y_in[i])/(x_in[i+1]-x_in[i])
+				interpolation = 	
+				interpolation.append(linearfit)
+		self.interpolation
+	def linearmodel(self):
+		return self.interpolation
+"""
+	def linearexpected(self,x):
+		x = map(np.float64,x)	
+		for j in range(len(x)):	
+				A=(x_in[i+1]-x)/(x_in[i+1]-x_in[i])
+				B=1.-A	
+				linearfit=A*y_in[i]+B*y_in[i+1]	
+			expected.append(self.interpolation)
+		return expected
+"""	
+			
+linear_interpolation = linearinterpolation(xdata,ydata)
 
 #cubic interpolation
 cubic_interpolation = interp1d(xdata,ydata, kind="cubic")

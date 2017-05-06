@@ -25,29 +25,32 @@ data.close()
 
 #linear interpolation
 def interpolate(x):
-	index1=0
-	index2=0
-	if(x<xdata[0]):
+	yref=np.array([])
+	for entry in x:
 		index1=0
-		index2=1
-	if(x>xdata[len(xdata)-1]):
-		index1=len(xdata)-2
-		index2=len(xdata)-1
-	for i in range(1,len(xdata)-1):
-		if(x>xdata[i-1])and(x<xdata[i]):
-			index1=i-1
-			index2=i
+		index2=0
+		if(entry<xdata[0]):
+			index1=0
+			index2=1
+		if(entry>xdata[len(xdata)-1]):
+			index1=len(xdata)-2
+			index2=len(xdata)-1
+		for i in range(1,len(xdata)-1):
+			if(entry>xdata[i-1])and(entry<xdata[i]):
+				index1=i-1
+				index2=i
 	
-	slope=(ydata[index2]-ydata[index1])/(xdata[index2]-xdata[index1])
-	b=ydata[index1]-slope*xdata[index1]
-	
-	return slope*x+b
+		slope=(ydata[index2]-ydata[index1])/(xdata[index2]-xdata[index1])
+		b=ydata[index1]-slope*xdata[index1]
+		y=slope*entry+b	
+		yref=np.append(yref,float(y))
+	return yref
 
-linear_interpolation = interpolate(0.4)
-xref=np.arange(-2.1,3.8,0.1)
+
+xref=np.arange(-2.05,4.05,0.05)
 print xref
 
-
+yref=interpolate(xref)
 
 #cubic interpolation
 
@@ -56,17 +59,17 @@ print xref
 #plotting
 
 import matplotlib.pyplot as plt
-plt.plot(xdata, ydata, 'o', xref, linear_interpolation(xref), '-')
+plt.plot(xdata, ydata, 'o', xref, yref, '-')
 plt.legend(['data', 'linear'], loc='best')
 plt.show()
 
 
 #task 1.a):
 print "Expected value of linear interpolation:"
-print "x=0.4:",linear_interpolation(0.4).round(4)
-print "x=-0.128:",linear_interpolation(-0.128).round(4)
-print "x=-2.0:",linear_interpolation(-2.0).round(4)
-print "x=3.2:",linear_interpolation(3.2).round(4)
+print "x=0.4:",interpolate([0.4]).round(4)
+print "x=-0.128:",interpolate([-0.128]).round(4)
+print "x=-2.0:",interpolate([-2.0]).round(4)
+print "x=3.2:",interpolate([3.2]).round(4)
 """
 #task 1.b):
 print "Expected value of cubic interpolation:"

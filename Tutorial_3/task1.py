@@ -17,11 +17,12 @@ ydata=np.array([])
 for i in range(len(get_data)):
 	x = get_data[i][0]	
 	y = get_data[i][1]
-	xdata=np.append(xdata,float(x))
-	ydata=np.append(ydata,float(y))
+	xdata=np.append(xdata,np.float64(x))
+	ydata=np.append(ydata,np.float64(y))
 print xdata
 print ydata
 data.close()
+
 
 #linear interpolation
 def interpolate(x):
@@ -35,11 +36,10 @@ def interpolate(x):
 		if(entry>xdata[len(xdata)-1]):
 			index1=len(xdata)-2
 			index2=len(xdata)-1
-		for i in range(1,len(xdata)-1):
+		for i in range(1,len(xdata)):
 			if(entry>xdata[i-1])and(entry<xdata[i]):
 				index1=i-1
 				index2=i
-	
 		slope=(ydata[index2]-ydata[index1])/(xdata[index2]-xdata[index1])
 		b=ydata[index1]-slope*xdata[index1]
 		y=slope*entry+b	
@@ -47,7 +47,7 @@ def interpolate(x):
 	return yref
 
 
-xref=np.arange(-2.05,4.05,0.05)
+xref=np.arange(-2.15,4.05,0.05)
 print xref
 
 yref=interpolate(xref)

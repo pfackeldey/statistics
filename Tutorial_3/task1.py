@@ -62,6 +62,7 @@ import matplotlib.pyplot as plt
 plt.plot(xdata, ydata, 'o', xref, yref, '-')
 plt.legend(['data', 'linear'], loc='best')
 plt.show()
+plt.savefig("interpolation.pdf", format="pdf")
 
 
 #task 1.a):

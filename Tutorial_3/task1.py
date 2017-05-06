@@ -52,9 +52,22 @@ print xref
 
 yref=interpolate(xref)
 
+a=np.array([])
+b=np.array([])
+c=np.array([])
+F=np.array([])
+
+
 #cubic interpolation
-
-
+def cubic_interpolation(x):
+	for i in range(1,len(xdata)):
+		a[i]=1./6.*(xdata[i]-xdata[i-1])
+	for i in range(1,len(xdata)-1):		
+		b[i]=1./3.*(xdata[i+1]-xdata[i-1])
+	for i in range(len(xdata)-1):
+		c[i]=1./6.*(xdata[i+1]-xdata[i])
+	for i in range(1,len(xdata)-1):
+		(ydata[i+1]-ydata[i])/(xdata[i+1]-xdata[i])-(ydata[i]-ydata[i-1])/(xdata[i]-xdata[i-1])
 
 #plotting
 

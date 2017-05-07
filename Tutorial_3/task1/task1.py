@@ -54,7 +54,7 @@ def cubic_interpolation(x):
 		a[i-1]=1./6.*(xdata[i]-xdata[i-1])
 	for i in range(0,len(xdata)):
 		if(i==0):
-			b[i]=1.
+			b[i]=1.	#boundary condition
 		else:
 			if(i==len(xdata)-1):
 				b[i]=1.
@@ -64,10 +64,10 @@ def cubic_interpolation(x):
 		c[i]=1./6. *(xdata[i+1]-xdata[i])
 	for i in range(0,len(xdata)):
 		if(i==0):
-			F[i]=1.
+			F[i]=0.5	#boundary condition
 		else:
 			if(i==(len(xdata)-1)):
-				F[i]=1.
+				F[i]=0.0	#boundary condition
 			else:
 				F[i]=(ydata[i+1]-ydata[i])/(xdata[i+1]-xdata[i]) - (ydata[i]-ydata[i-1])/(xdata[i]-xdata[i-1])
 				
@@ -117,8 +117,9 @@ y2plot_cubic=cubic_interpolation(x2plot)
 plt.plot(xdata, ydata, 'o', x2plot, y2plot, '-')
 plt.plot( x2plot, y2plot_cubic, '-')
 plt.legend(['data', 'linear','cubic'], loc='best')
+plt.savefig("interpolation.png", format="png")
 plt.show()
-plt.savefig("interpolation.pdf", format="pdf")
+
 
 
 #task 1.a):
@@ -134,4 +135,15 @@ print "x=0.4:",cubic_interpolation([0.4]).round(4)
 print "x=-0.128:",cubic_interpolation([-0.128]).round(4)
 print "x=-2.0:",cubic_interpolation([-2.0]).round(4)
 print "x=3.2:",cubic_interpolation([3.2]).round(4)
+
+#task 1.d):
+"""
+While playing with the boundary conditions one obtains that especially the boundary condition of the last entry of the F array changes a lot in performance. The last two points have a slope near to 0, which does not allow big numbers for this boundary condition. Otherwise you will get huge oszillations in the last few x-values! 
+best boundary conditions found: b[0]=1., F[0]=0.5 and F[last_index]=0.0
+"""
+
+#task 1.e):
+"""
+The best solution gives the cubic spline interpolation, but only if you find the right boundary conditions. Otherwise you will get huge oszillations and the prediction of the interpolation rountine will get really bad. This routine allows way better prediction of the solution because you take higher order of the polynomial taylor expansion.  
+"""
 

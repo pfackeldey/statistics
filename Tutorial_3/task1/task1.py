@@ -24,14 +24,14 @@ def interpolate(x):
 	for entry in x:
 		index1=0
 		index2=0
-		if(entry<xdata[0]):
+		if(entry<=xdata[0]):
 			index1=0
 			index2=1
-		if(entry>xdata[len(xdata)-1]):
+		if(entry>=xdata[len(xdata)-1]):
 			index1=len(xdata)-2
 			index2=len(xdata)-1
 		for i in range(1,len(xdata)):
-			if(entry>xdata[i-1])and(entry<xdata[i]):
+			if(entry>=xdata[i-1])and(entry<=xdata[i]):
 				index1=i-1
 				index2=i
 		A=(xdata[index2]-entry)/(xdata[index2]-xdata[index1])

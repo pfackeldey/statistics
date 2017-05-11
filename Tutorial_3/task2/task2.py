@@ -9,13 +9,6 @@ def quadratic(x):
 def linear(x):
 	return x
 	
-x_data=[1.,2.,3.,4.,5.]
-x_data =np.array(x_data)
-#~ y_data = quadratic(x_data)
-
-start=1.
-end=5.
-steps=5.
 
 def trapezoidal(a,b,func,n):
 	intervals=n-1
@@ -44,9 +37,9 @@ print "int x from 1 to 5"
 print "true value:", integrate.quad(linear, 1.,5.)[0]
 print "trapezoidal", trapezoidal(1.,5.,linear,5)
 print "difference" , abs(integrate.quad(linear, 1.,5.)[0]-trapezoidal(1.,5.,linear,5))
+print "simpson", simpson(1.,5.,linear,5)
 print "difference" , abs(integrate.quad(linear, 1.,5.)[0]-simpson(1.,5.,linear,5))
 
-print "simpson", simpson(1.,5.,linear,5)
 print ""
 print "int x^2 from 1 to 5"
 print "true value:", integrate.quad(quadratic, 1.,5.)[0]

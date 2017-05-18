@@ -4,7 +4,7 @@ import random
 import argparse
 
 parser = argparse.ArgumentParser(description='Calculate pi.')
-parser.add_argument('-n','--number-randomed', type=int, help='Number of random generated x and y. (recommended: n>1000)')
+parser.add_argument('-n','--number-randomed', type=int,default=1000, help='Number of random generated x and y. (recommended: n>1000)')
 
 args = parser.parse_args()
 

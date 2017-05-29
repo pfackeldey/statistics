@@ -17,12 +17,12 @@ def side_length(r):
 #point on surface:
 P = (0.,1.)
 count = 0.
-n=1000
+n=10000
 
 #TASK A:
 for i in range(n):
-	r=random.random()
-	alpha = random.random()*(2*np.pi)
+	r=np.sqrt(random.random())
+	alpha = random.uniform(-0.5,0.5)*(2*np.pi)
         x,y = r*np.cos(alpha), r*np.sin(alpha)
 	new_P = (x,y)
 	if distance(P,new_P)>side_length(1.):
@@ -34,26 +34,28 @@ for i in range(n):
 print "Result of task a: ",count/float(n)
 
 #TASK B:
-# P = 1/3 * (CIRCLE AREA - TRIANGLE ARE)
-
+# P =1-1/3 * (CIRCLE AREA - TRIANGLE ARE)
+P=1. - 1./3. * (np.pi*1.**2. - np.sqrt(3.)/4. * side_length(1.)**2.)
+print "Analytical calculated probability is: ",P
 
 
 #TASK C:
 #FIRST METHOD
-P = (0.,1.)
 count = 0.
 n=1000
 r=1.
 
 for i in range(n):
 	alpha = random.random()*(2*np.pi)
-        x,y = r*np.cos(alpha), r*np.sin(alpha)
+	x,y = r*np.cos(alpha), r*np.sin(alpha)
 	new_P = (x,y)
-	if distance(P,new_P)>side_length(1.):
+	alpha2 = random.random()*(2*np.pi)
+	x2,y2 = r*np.cos(alpha2), r*np.sin(alpha2)
+	new_P2 = (x2,y2)
+	if distance(new_P2,new_P)>side_length(1.):
 		count += 1.
 	else:
 		pass
-
 
 print "Result of first method: ",count/float(n)
 
@@ -62,7 +64,7 @@ print "Result of first method: ",count/float(n)
 #middle of radius: 
 P = (0,1)
 count = 0.
-n=1000
+n=10000
 r=1.
 
 alpha = random.random()*(2*np.pi)
@@ -87,11 +89,25 @@ print "Result of second method: ",float(count)/float(n)
 	
 
 #THIRD METHOD
-P = (0,1)
 count = 0.
-n=1000
-r=1.
+n=10000
 
+for i in range(n):
+	#Point on big circle:
+	r = np.sqrt(random.random())
+	alpha= random.random()
+	x1,y1 = r*np.cos(alpha), r*np.sin(alpha)
+	P1 = (x1,y1)
+	#Point on small circle:
+	r_small = 1/2.
+	x2,y2 = r_small*np.cos(alpha), r_small*np.sin(alpha)
+	P2 = (x2,y2)
+	if distance(P1,(0.,0.))<distance(P2,(0.,0.)):
+		count += 1
+	else:
+		pass
+
+print "Result of third method: ",float(count)/float(n)	
 
 
 

@@ -14,7 +14,8 @@ def distance(A,B):
 def side_length(r):
 	return 3*r/np.sqrt(3) #from geometrics
 
-
+def line(A,B,x):
+	return (B[1]-A[1])/(B[0]-A[0]) * x + 1.
 
 #point on surface:
 P = (0.,1.)
@@ -25,8 +26,12 @@ for i in range(n):
 	r=np.sqrt(random.random())
 	alpha = random.uniform(-0.5,0.5)*(2*np.pi)
         x,y = r*np.cos(alpha), r*np.sin(alpha)
-	new_P = (x,y)
-	if distance(P,new_P)>side_length(1.):
+	new_P1 = (x,y)
+	m = (new_P1[1]-P[1])/(new_P1[0]-P[0])
+	x1 = -2*m*(m**2+1.)
+	y1 = line(new_P1,P,x1)
+	new_P2 = (x1,y1)
+	if distance(P,new_P2)>side_length(1.):
 		count += 1.
 	else:
 		pass
@@ -96,7 +101,6 @@ for i in range(n):
 	x,y = m*np.cos(alpha),m*np.sin(alpha)
 	M = (x,y)
 	beta = alpha-np.pi/2
-	r_mid = (r/2.*np.cos(alpha), r/2.*np.sin(alpha))
 	length = np.sqrt(pow(r,2)-pow(distance(M,(0,0)),2))
 	x1,y1 = x+length*np.cos(beta),y+length*np.sin(beta)
 	x2,y2 = x-length*np.cos(beta),y-length*np.sin(beta)

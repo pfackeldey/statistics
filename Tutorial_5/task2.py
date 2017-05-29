@@ -27,7 +27,7 @@ n=1000
 fig, (ax,ax1) = plt.subplots(nrows=2, ncols=1)
 ax.set_xlim(-1.,1.)
 ax.set_ylim(-1.,1.)
-ax.set_title("Plot of Chords")
+ax.set_title("Task a: Chords")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
@@ -35,7 +35,7 @@ ax.add_artist(circle)
 
 ax1.set_xlim(-1.,1.)
 ax1.set_ylim(-1.,1.)
-ax1.set_title("Plot of midpoints")
+ax1.set_title("Task a: midpoints")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
@@ -58,7 +58,7 @@ for i in range(n):
 		ax.plot([x1,0.],[y1,1.], color = 'green')
 		ax1.plot(x1/2.,(1.+y1)/2., color = 'green', marker = '.')
 
-print "Result of task a: ",float(count)/float(n)
+print "Probability of task a: ",float(count)/float(n)
 plt.tight_layout()
 plt.grid()
 plt.show()
@@ -78,7 +78,7 @@ r=1.
 fig, (ax,ax1) = plt.subplots(nrows=2, ncols=1)
 ax.set_xlim(-1.,1.)
 ax.set_ylim(-1.,1.)
-ax.set_title("Plot of Chords")
+ax.set_title("Bertrand's method 1: Chords")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
@@ -86,7 +86,7 @@ ax.add_artist(circle)
 
 ax1.set_xlim(-1.,1.)
 ax1.set_ylim(-1.,1.)
-ax1.set_title("Plot of midpoints")
+ax1.set_title("Bertrand's method 1: midpoints")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
@@ -111,7 +111,7 @@ plt.grid()
 plt.show()
 
 
-print "Result of first method: ",count/float(n)
+print "Probability of first method: ",count/float(n)
 
 
 #SECOND METHOD
@@ -123,7 +123,7 @@ r=1.
 fig, (ax,ax1) = plt.subplots(nrows=2, ncols=1)
 ax.set_xlim(-1.,1.)
 ax.set_ylim(-1.,1.)
-ax.set_title("Plot of Chords")
+ax.set_title("Bertrand's method 2: Chords")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
@@ -131,7 +131,7 @@ ax.add_artist(circle)
 
 ax1.set_xlim(-1.,1.)
 ax1.set_ylim(-1.,1.)
-ax1.set_title("Plot of midpoints")
+ax1.set_title("Bertrand's method 2: midpoints")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
@@ -163,7 +163,7 @@ plt.tight_layout()
 plt.grid()
 plt.show()
 
-print "Result of second method: ",float(count)/float(n)
+print "Probability of second method: ",float(count)/float(n)
 	
 
 #THIRD METHOD
@@ -172,7 +172,7 @@ count = 0.
 fig, (ax,ax1) = plt.subplots(nrows=2, ncols=1)
 ax.set_xlim(-1.,1.)
 ax.set_ylim(-1.,1.)
-ax.set_title("Plot of Chords")
+ax.set_title("Bertrand's method 3: Chords")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
@@ -183,7 +183,7 @@ plt.Circle((0., 0.), 1., fill=False, color='red')
 
 ax1.set_xlim(-1.,1.)
 ax1.set_ylim(-1.,1.)
-ax1.set_title("Plot of midpoints")
+ax1.set_title("Bertrand's method 3: midpoints")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
@@ -220,4 +220,4 @@ plt.tight_layout()
 plt.grid()
 plt.show()
 
-print "Result of third method: ",float(count)/float(n)		
+print "Probability of third method: ",float(count)/float(n)		

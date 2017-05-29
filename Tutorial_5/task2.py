@@ -87,15 +87,16 @@ ax.set_ylim(-1.,1.)
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
 ax.add_artist(circle)
 
-alpha = random.random()*(2*np.pi)
-beta = abs(alpha-np.pi/2)
-r_mid = (r/2.*np.cos(alpha), r/2.*np.sin(alpha))
+
 
 for i in range(n):
 	# random point on the radius
 	m = random.random()*r
+	alpha = random.random()*(2*np.pi)
 	x,y = m*np.cos(alpha),m*np.sin(alpha)
 	M = (x,y)
+	beta = alpha-np.pi/2
+	r_mid = (r/2.*np.cos(alpha), r/2.*np.sin(alpha))
 	length = np.sqrt(pow(r,2)-pow(distance(M,(0,0)),2))
 	x1,y1 = x+length*np.cos(beta),y+length*np.sin(beta)
 	x2,y2 = x-length*np.cos(beta),y-length*np.sin(beta)
@@ -137,7 +138,7 @@ for i in range(n):
 	P = (x,y)
 	
 	#chord
-	beta = abs(alpha-np.pi/2)
+	beta = alpha-np.pi/2
 	length = np.sqrt(pow(1.,2)-pow(distance(P,(0,0)),2))
 	x1,y1 = x+length*np.cos(beta),y+length*np.sin(beta)
 	x2,y2 = x-length*np.cos(beta),y-length*np.sin(beta)

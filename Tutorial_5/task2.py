@@ -14,6 +14,7 @@ def distance(A,B):
 def side_length(r):
 	return 3*r/np.sqrt(3) #from geometrics
 
+#line definition:
 def line(A,B,x):
 	return (B[1]-A[1])/(B[0]-A[0]) * x + 1.
 
@@ -23,14 +24,22 @@ count = 0.
 n=1000
 
 #TASK A:
-fig, ax = plt.subplots()
+fig, (ax,ax1) = plt.subplots(nrows=2, ncols=1)
 ax.set_xlim(-1.,1.)
 ax.set_ylim(-1.,1.)
+ax.set_title("Plot of Chords")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
 ax.add_artist(circle)
 
+ax1.set_xlim(-1.,1.)
+ax1.set_ylim(-1.,1.)
+ax1.set_title("Plot of midpoints")
+
+#circle plot:
+circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
+ax1.add_artist(circle)
 
 for i in range(n):
 	r=np.sqrt(random.random())
@@ -41,14 +50,17 @@ for i in range(n):
 	x1 = -2*m/(m**2+1.)
 	y1 = line(new_P1,P,x1)
 	new_P2 = (x1,y1)
+	ax1.plot(x1/2.,y1/2, color = 'blue')
 	if distance(P,new_P2)>side_length(1.):
 		count += 1.
 		ax.plot([x1,0.],[y1,1.], color = 'red')	
+		ax1.plot(x1/2.,y1/2, color = 'blue')	
 	else:
 		ax.plot([x1,0.],[y1,1.], color = 'green')
+		ax1.plot(x1/2.,y1/2, color = 'yellow')
 
 print "Result of task a: ",float(count)/float(n)
-
+plt.tight_layout()
 plt.grid()
 plt.show()
 
@@ -56,7 +68,7 @@ plt.show()
 #TASK B:
 # P =(CIRCLE AREA - TRIANGLE ARE)/CIRCLE AREA
 P=(np.pi*1.**2. - np.sqrt(3.)/4. * side_length(1.)**2.)/(np.pi*1.**2.)
-print "Analytical calculated probability is: ",P
+print "Analytical calculated probability is: ",round(P,3)
 
 
 #TASK C:
@@ -64,13 +76,22 @@ print "Analytical calculated probability is: ",P
 count = 0.
 r=1.
 
-fig, ax = plt.subplots()
+fig, (ax,ax1) = plt.subplots(nrows=2, ncols=1)
 ax.set_xlim(-1.,1.)
 ax.set_ylim(-1.,1.)
+ax.set_title("Plot of Chords")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
 ax.add_artist(circle)
+
+ax1.set_xlim(-1.,1.)
+ax1.set_ylim(-1.,1.)
+ax1.set_title("Plot of midpoints")
+
+#circle plot:
+circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
+ax1.add_artist(circle)
 
 for i in range(n):
 	alpha = random.random()*(2*np.pi)
@@ -80,12 +101,13 @@ for i in range(n):
 	x2,y2 = r*np.cos(alpha2), r*np.sin(alpha2)
 	new_P2 = (x2,y2)
 	if distance(new_P2,new_P1)>side_length(1.):
-		ax.plot([x1,x2],[y1,y2], color = 'red')		
+		ax.plot([x1,x2],[y1,y2], color = 'red')
+		ax1.plot((x1-x2)/2.,(y1-y2), color = 'blue')		
 		count += 1.
 	else:
 		ax.plot([x1,x2],[y1,y2], color = 'green')
-
-#triangle plot:
+		ax1.plot((x1-x2)/2.,(y1-y2), color = 'yellow')
+plt.tight_layout()
 plt.grid()
 plt.show()
 
@@ -99,13 +121,22 @@ P = (0,1)
 count = 0.
 r=1.
 
-fig, ax = plt.subplots()
+fig, (ax,ax1) = plt.subplots(nrows=2, ncols=1)
 ax.set_xlim(-1.,1.)
 ax.set_ylim(-1.,1.)
+ax.set_title("Plot of Chords")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
 ax.add_artist(circle)
+
+ax1.set_xlim(-1.,1.)
+ax1.set_ylim(-1.,1.)
+ax1.set_title("Plot of midpoints")
+
+#circle plot:
+circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
+ax1.add_artist(circle)
 
 
 
@@ -122,13 +153,14 @@ for i in range(n):
 	P1 = (x1,y1)
 	P2 = (x2,y2)
 	if distance(P1,P2)>side_length(1.):
-		ax.plot([x1,x2],[y1,y2], color = 'red')		
+		ax.plot([x1,x2],[y1,y2], color = 'red')	
+		ax1.plot(x,y, color = 'blue')		
 		count += 1.
 	else:
 		ax.plot([x1,x2],[y1,y2], color = 'green')
+		ax1.plot(x,y, color = 'yellow')	
 
-
-#triangle plot:
+plt.tight_layout()
 plt.grid()
 plt.show()
 
@@ -138,9 +170,10 @@ print "Result of second method: ",float(count)/float(n)
 #THIRD METHOD
 count = 0.
 
-fig, ax = plt.subplots()
+fig, (ax,ax1) = plt.subplots(nrows=2, ncols=1)
 ax.set_xlim(-1.,1.)
 ax.set_ylim(-1.,1.)
+ax.set_title("Plot of Chords")
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
@@ -148,6 +181,14 @@ ax.add_artist(circle)
 
 #circle plot:
 plt.Circle((0., 0.), 1., fill=False, color='blue')
+
+ax1.set_xlim(-1.,1.)
+ax1.set_ylim(-1.,1.)
+ax1.set_title("Plot of midpoints")
+
+#circle plot:
+circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
+ax1.add_artist(circle)
 
 for i in range(n):
 	#Point on big circle:
@@ -169,24 +210,15 @@ for i in range(n):
 	x3,y3 = r_small*np.cos(alpha), r_small*np.sin(alpha)
 	P3 = (x3,y3)
 	if distance(P,(0.,0.))<distance(P3,(0.,0.)):
-		ax.plot([x1,x2],[y1,y2], color = 'red')		
+		ax.plot([x1,x2],[y1,y2], color = 'red')	
+		ax1.plot(x,y, color = 'blue')	
 		count += 1.
 	else:
 		ax.plot([x1,x2],[y1,y2], color = 'green')
+		ax1.plot(x,y, color = 'yellow')
 
-
-#triangle plot:
+plt.tight_layout()
 plt.grid()
 plt.show()
 
-print "Result of third method: ",float(count)/float(n)	
-
-
-
-
-
-
-
-
-
-	
+print "Result of third method: ",float(count)/float(n)		

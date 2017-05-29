@@ -53,10 +53,10 @@ for i in range(n):
 	if distance(P,new_P2)>side_length(1.):
 		count += 1.
 		ax.plot([x1,0.],[y1,1.], color = 'red')	
-		ax1.plot(x1/2.,y1/2., color = 'blue')	
+		ax1.plot(x1/2.,(1.+y1)/2., color = 'red', marker = '.')	
 	else:
 		ax.plot([x1,0.],[y1,1.], color = 'green')
-		ax1.plot(x1/2.,y1/2., color = 'yellow')
+		ax1.plot(x1/2.,(1.+y1)/2., color = 'green', marker = '.')
 
 print "Result of task a: ",float(count)/float(n)
 plt.tight_layout()
@@ -101,11 +101,11 @@ for i in range(n):
 	new_P2 = (x2,y2)
 	if distance(new_P2,new_P1)>side_length(1.):
 		ax.plot([x1,x2],[y1,y2], color = 'red')
-		ax1.plot((x1-x2)/2.,(y1-y2)/2., color = 'blue')		
+		ax1.plot((x2+x1)/2.,(y2+y1)/2., color = 'red', marker = '.')		
 		count += 1.
 	else:
 		ax.plot([x1,x2],[y1,y2], color = 'green')
-		ax1.plot((x1-x2)/2.,(y1-y2)/2., color = 'yellow')
+		ax1.plot((x2+x1)/2.,(y2+y1)/2., color = 'green', marker = '.')
 plt.tight_layout()
 plt.grid()
 plt.show()
@@ -153,11 +153,11 @@ for i in range(n):
 	P2 = (x2,y2)
 	if distance(P1,P2)>side_length(1.):
 		ax.plot([x1,x2],[y1,y2], color = 'red')	
-		ax1.plot(x,y, color = 'blue')		
+		ax1.plot(x,y, color = 'red', marker = '.')		
 		count += 1.
 	else:
 		ax.plot([x1,x2],[y1,y2], color = 'green')
-		ax1.plot(x,y, color = 'yellow')	
+		ax1.plot(x,y, color = 'green', marker = '.')	
 
 plt.tight_layout()
 plt.grid()
@@ -179,7 +179,7 @@ circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
 ax.add_artist(circle)
 
 #circle plot:
-plt.Circle((0., 0.), 1., fill=False, color='blue')
+plt.Circle((0., 0.), 1., fill=False, color='red')
 
 ax1.set_xlim(-1.,1.)
 ax1.set_ylim(-1.,1.)
@@ -210,11 +210,11 @@ for i in range(n):
 	P3 = (x3,y3)
 	if distance(P,(0.,0.))<distance(P3,(0.,0.)):
 		ax.plot([x1,x2],[y1,y2], color = 'red')	
-		ax1.plot(x,y, color = 'blue')	
+		ax1.plot(x,y, color = 'red', marker = '.')	
 		count += 1.
 	else:
 		ax.plot([x1,x2],[y1,y2], color = 'green')
-		ax1.plot(x,y, color = 'yellow')
+		ax1.plot(x,y, color = 'green', marker = '.')
 
 plt.tight_layout()
 plt.grid()

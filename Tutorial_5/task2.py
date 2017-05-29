@@ -33,6 +33,9 @@ for i in range(n):
 
 print "Result of task a: ",count/float(n)
 
+#TASK B:
+# P = 1/3 * (CIRCLE AREA - TRIANGLE ARE)
+
 
 
 #TASK C:
@@ -54,27 +57,40 @@ for i in range(n):
 
 print "Result of first method: ",count/float(n)
 
-#SECOND METHOD
 
+#SECOND METHOD
+#middle of radius: 
 P = (0,1)
 count = 0.
 n=1000
 r=1.
 
+alpha = random.random()*(2*np.pi)
+beta = abs(alpha-np.pi/2)
+r_mid = (r/2*np.cos(alpha), r/2*np.sin(alpha))
 for i in range(n):
-	alpha = random.uniform(-0.5,0.5)*(np.pi)
-	x1,y1 = r*np.cos(alpha), r*np.sin(alpha)
-	#point on the opposite side:
-	new_P1 = (x1,y1)
-	new_P2 = (-x1,y1)
-	if distance(new_P1,new_P2)>side_length(1.):
-		count += 1. 
-	else:
-		pass	
+	# random point on the radius
+	m = random.random()*r
+	x,y = m*np.cos(alpha),m*np.sin(alpha)
+	M = (x,y)
+	length = np.sqrt(pow(r,2)-pow(distance(M,(0,0)),2))
+	x1,y1 = x+length*np.cos(beta),y+length*np.sin(beta)
+	x2,y2 = x-length*np.cos(beta),y-length*np.sin(beta)
+	P1 = (x1,y1)
+	P2 = (x2,y2)
+	if distance(P1,P2)>side_length(1.):
+		count += 1.
+	else: 
+		pass
 
 print "Result of second method: ",float(count)/float(n)
+	
 
-
+#THIRD METHOD
+P = (0,1)
+count = 0.
+n=1000
+r=1.
 
 
 

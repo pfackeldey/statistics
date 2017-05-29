@@ -36,7 +36,6 @@ ax.add_artist(circle)
 ax1.set_xlim(-1.,1.)
 ax1.set_ylim(-1.,1.)
 ax1.set_title("Plot of midpoints")
-ax1.set_marker('.')
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')

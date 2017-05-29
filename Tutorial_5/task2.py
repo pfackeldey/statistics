@@ -56,20 +56,19 @@ print "Result of first method: ",count/float(n)
 
 #SECOND METHOD
 
-P = (0.,1.)
+P = (0,1)
 count = 0.
-n=10000
+n=1000
 r=1.
 
 for i in range(n):
 	alpha = random.uniform(-0.5,0.5)*(np.pi)
-	beta = 2*alpha+np.pi
-        x1,y1 = r*np.cos(alpha), r*np.sin(alpha)
-	x2,y2 = r*np.cos(beta), r*np.sin(beta)
+	x1,y1 = r*np.cos(alpha), r*np.sin(alpha)
+	#point on the opposite side:
 	new_P1 = (x1,y1)
-	new_P2 = (x2,y2)
+	new_P2 = (-x1,y1)
 	if distance(new_P1,new_P2)>side_length(1.):
-		count += 1.
+		count += 1. 
 	else:
 		pass	
 

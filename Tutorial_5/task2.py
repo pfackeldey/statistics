@@ -65,8 +65,8 @@ plt.show()
 
 
 #TASK B:
-# P =(CIRCLE AREA - TRIANGLE ARE)/CIRCLE AREA
-P=(np.pi*1.**2. - np.sqrt(3.)/4. * side_length(1.)**2.)/(np.pi*1.**2.)
+# P =(1/3*(CIRCLE AREA - TRIANGLE ARE)+TRIANGLE AREA)/CIRCLE AREA
+P=(1./3.*(np.pi*1.**2. - np.sqrt(3.)/4. * side_length(1.)**2.)+np.sqrt(3.)/4. * side_length(1.)**2.)/(np.pi*1.**2.)
 print "Analytical calculated probability is: ",round(P,3)
 
 

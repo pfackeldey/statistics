@@ -137,7 +137,8 @@ for i in range(n):
 	P = (x,y)
 	
 	#chord
-	length = np.sqrt(pow(r,2)-pow(distance(P,(0,0)),2))
+	beta = abs(alpha-np.pi/2)
+	length = np.sqrt(pow(1.,2)-pow(distance(P,(0,0)),2))
 	x1,y1 = x+length*np.cos(beta),y+length*np.sin(beta)
 	x2,y2 = x-length*np.cos(beta),y-length*np.sin(beta)
 	P1 = (x1,y1)

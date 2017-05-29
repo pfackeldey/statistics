@@ -55,11 +55,11 @@ ax.add_artist(circle)
 for i in range(n):
 	alpha = random.random()*(2*np.pi)
 	x1,y1 = r*np.cos(alpha), r*np.sin(alpha)
-	new_P = (x1,y1)
+	new_P1 = (x1,y1)
 	alpha2 = random.random()*(2*np.pi)
 	x2,y2 = r*np.cos(alpha2), r*np.sin(alpha2)
 	new_P2 = (x2,y2)
-	if distance(new_P2,new_P)>side_length(1.):
+	if distance(new_P2,new_P1)>side_length(1.):
 		ax.plot([x1,x2],[y1,y2], color = 'red')		
 		count += 1.
 	else:
@@ -90,6 +90,7 @@ ax.add_artist(circle)
 alpha = random.random()*(2*np.pi)
 beta = abs(alpha-np.pi/2)
 r_mid = (r/2.*np.cos(alpha), r/2.*np.sin(alpha))
+
 for i in range(n):
 	# random point on the radius
 	m = random.random()*r
@@ -131,14 +132,22 @@ plt.Circle((0., 0.), 1., fill=False, color='blue')
 for i in range(n):
 	#Point on big circle:
 	r = np.sqrt(random.random())
-	alpha= random.random()
-	x1,y1 = r*np.cos(alpha), r*np.sin(alpha)
+	alpha= random.random()*(2*np.pi)
+	x,y = r*np.cos(alpha), r*np.sin(alpha)
+	P = (x,y)
+	
+	#chord
+	length = np.sqrt(pow(r,2)-pow(distance(P,(0,0)),2))
+	x1,y1 = x+length*np.cos(beta),y+length*np.sin(beta)
+	x2,y2 = x-length*np.cos(beta),y-length*np.sin(beta)
 	P1 = (x1,y1)
+	P2 = (x2,y2)
+	
 	#Point on small circle:
 	r_small = 1./2.
-	x2,y2 = r_small*np.cos(alpha), r_small*np.sin(alpha)
-	P2 = (x2,y2)
-	if distance(P1,(0.,0.))<distance(P2,(0.,0.)):
+	x3,y3 = r_small*np.cos(alpha), r_small*np.sin(alpha)
+	P3 = (x3,y3)
+	if distance(P,(0.,0.))<distance(P3,(0.,0.)):
 		ax.plot([x1,x2],[y1,y2], color = 'red')		
 		count += 1.
 	else:

@@ -43,7 +43,14 @@ print "Analytical calculated probability is: ",P
 #FIRST METHOD
 count = 0.
 r=1.
-plt.figure(1)
+
+fig, ax = plt.subplots()
+ax.set_xlim(-1.,1.)
+ax.set_ylim(-1.,1.)
+
+#circle plot:
+circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
+ax.add_artist(circle)
 
 for i in range(n):
 	alpha = random.random()*(2*np.pi)
@@ -53,13 +60,11 @@ for i in range(n):
 	x2,y2 = r*np.cos(alpha2), r*np.sin(alpha2)
 	new_P2 = (x2,y2)
 	if distance(new_P2,new_P)>side_length(1.):
-		plt.plot([x1,x2],[y1,y2], color = 'red')		
+		ax.plot([x1,x2],[y1,y2], color = 'red')		
 		count += 1.
 	else:
-		plt.plot([x1,x2],[y1,y2], color = 'green')
+		ax.plot([x1,x2],[y1,y2], color = 'green')
 
-#circle plot:
-plt.Circle((0, 0), 1., fill=False, color='blue')
 #triangle plot:
 plt.grid()
 plt.show()
@@ -74,11 +79,17 @@ P = (0,1)
 count = 0.
 r=1.
 
-plt.figure(2)
+fig, ax = plt.subplots()
+ax.set_xlim(-1.,1.)
+ax.set_ylim(-1.,1.)
+
+#circle plot:
+circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
+ax.add_artist(circle)
 
 alpha = random.random()*(2*np.pi)
 beta = abs(alpha-np.pi/2)
-r_mid = (r/2*np.cos(alpha), r/2*np.sin(alpha))
+r_mid = (r/2.*np.cos(alpha), r/2.*np.sin(alpha))
 for i in range(n):
 	# random point on the radius
 	m = random.random()*r
@@ -90,13 +101,12 @@ for i in range(n):
 	P1 = (x1,y1)
 	P2 = (x2,y2)
 	if distance(P1,P2)>side_length(1.):
-		plt.plot([x1,x2],[y1,y2], color = 'red')		
+		ax.plot([x1,x2],[y1,y2], color = 'red')		
 		count += 1.
 	else:
-		plt.plot([x1,x2],[y1,y2], color = 'green')
+		ax.plot([x1,x2],[y1,y2], color = 'green')
 
-#circle plot:
-plt.Circle((0, 0), 1., fill=False, color='blue')
+
 #triangle plot:
 plt.grid()
 plt.show()
@@ -107,7 +117,16 @@ print "Result of second method: ",float(count)/float(n)
 #THIRD METHOD
 count = 0.
 
-plt.figure(1)
+fig, ax = plt.subplots()
+ax.set_xlim(-1.,1.)
+ax.set_ylim(-1.,1.)
+
+#circle plot:
+circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
+ax.add_artist(circle)
+
+#circle plot:
+plt.Circle((0., 0.), 1., fill=False, color='blue')
 
 for i in range(n):
 	#Point on big circle:
@@ -116,17 +135,16 @@ for i in range(n):
 	x1,y1 = r*np.cos(alpha), r*np.sin(alpha)
 	P1 = (x1,y1)
 	#Point on small circle:
-	r_small = 1/2.
+	r_small = 1./2.
 	x2,y2 = r_small*np.cos(alpha), r_small*np.sin(alpha)
 	P2 = (x2,y2)
 	if distance(P1,(0.,0.))<distance(P2,(0.,0.)):
-		plt.plot([x1,x2],[y1,y2], color = 'red')		
+		ax.plot([x1,x2],[y1,y2], color = 'red')		
 		count += 1.
 	else:
-		plt.plot([x1,x2],[y1,y2], color = 'green')
+		ax.plot([x1,x2],[y1,y2], color = 'green')
 
-#circle plot:
-plt.Circle((0, 0), 1., fill=False, color='blue')
+
 #triangle plot:
 plt.grid()
 plt.show()

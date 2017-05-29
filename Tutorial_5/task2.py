@@ -21,26 +21,41 @@ def line(A,B,x):
 P = (0.,1.)
 count = 0.
 n=1000
+
 #TASK A:
+fig, ax = plt.subplots()
+ax.set_xlim(-1.,1.)
+ax.set_ylim(-1.,1.)
+
+#circle plot:
+circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
+ax.add_artist(circle)
+
+
 for i in range(n):
 	r=np.sqrt(random.random())
-	alpha = random.uniform(-0.5,0.5)*(2*np.pi)
+	alpha = random.random()*(2*np.pi)
         x,y = r*np.cos(alpha), r*np.sin(alpha)
 	new_P1 = (x,y)
 	m = (new_P1[1]-P[1])/(new_P1[0]-P[0])
-	x1 = -2*m*(m**2+1.)
+	x1 = -2*m/(m**2+1.)
 	y1 = line(new_P1,P,x1)
 	new_P2 = (x1,y1)
 	if distance(P,new_P2)>side_length(1.):
 		count += 1.
+		ax.plot([x1,0.],[y1,1.], color = 'red')	
 	else:
-		pass
+		ax.plot([x1,0.],[y1,1.], color = 'green')
 
-print "Result of task a: ",count/float(n)
+print "Result of task a: ",float(count)/float(n)
+
+plt.grid()
+plt.show()
+
 
 #TASK B:
-# P =1/3 * (CIRCLE AREA - TRIANGLE ARE)/CIRCLE AREA
-P=1./3. * (np.pi*1.**2. - np.sqrt(3.)/4. * side_length(1.)**2.)/(np.pi*1.**2.)
+# P =(CIRCLE AREA - TRIANGLE ARE)/CIRCLE AREA
+P=(np.pi*1.**2. - np.sqrt(3.)/4. * side_length(1.)**2.)/(np.pi*1.**2.)
 print "Analytical calculated probability is: ",P
 
 

@@ -36,6 +36,7 @@ ax.add_artist(circle)
 ax1.set_xlim(-1.,1.)
 ax1.set_ylim(-1.,1.)
 ax1.set_title("Plot of midpoints")
+ax1.set_marker('.')
 
 #circle plot:
 circle = plt.Circle((0., 0.), 1., fill=False, color='blue')
@@ -50,14 +51,13 @@ for i in range(n):
 	x1 = -2*m/(m**2+1.)
 	y1 = line(new_P1,P,x1)
 	new_P2 = (x1,y1)
-	ax1.plot(x1/2.,y1/2, color = 'blue')
 	if distance(P,new_P2)>side_length(1.):
 		count += 1.
 		ax.plot([x1,0.],[y1,1.], color = 'red')	
-		ax1.plot(x1/2.,y1/2, color = 'blue')	
+		ax1.plot(x1/2.,y1/2., color = 'blue')	
 	else:
 		ax.plot([x1,0.],[y1,1.], color = 'green')
-		ax1.plot(x1/2.,y1/2, color = 'yellow')
+		ax1.plot(x1/2.,y1/2., color = 'yellow')
 
 print "Result of task a: ",float(count)/float(n)
 plt.tight_layout()
@@ -102,11 +102,11 @@ for i in range(n):
 	new_P2 = (x2,y2)
 	if distance(new_P2,new_P1)>side_length(1.):
 		ax.plot([x1,x2],[y1,y2], color = 'red')
-		ax1.plot((x1-x2)/2.,(y1-y2), color = 'blue')		
+		ax1.plot((x1-x2)/2.,(y1-y2)/2., color = 'blue')		
 		count += 1.
 	else:
 		ax.plot([x1,x2],[y1,y2], color = 'green')
-		ax1.plot((x1-x2)/2.,(y1-y2), color = 'yellow')
+		ax1.plot((x1-x2)/2.,(y1-y2)/2., color = 'yellow')
 plt.tight_layout()
 plt.grid()
 plt.show()

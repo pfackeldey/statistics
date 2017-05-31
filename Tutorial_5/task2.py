@@ -4,8 +4,6 @@ import random
 from matplotlib import pyplot as plt
 
 
-
-
 #distance between 2 points:
 def distance(A,B):
 	return np.sqrt((B[0] - A[0])**2 + (B[1] - A[1])**2)
@@ -22,6 +20,9 @@ def line(A,B,x):
 P = (0.,1.)
 count = 0.
 n=1000
+
+print "n="+str(n)
+
 
 #TASK A:
 fig, (ax,ax1) = plt.subplots(nrows=2, ncols=1)
@@ -61,7 +62,7 @@ for i in range(n):
 print "Probability of task a: ",float(count)/float(n)
 plt.tight_layout()
 plt.grid()
-plt.show()
+plt.savefig("taskA.pdf")
 
 
 #TASK B:
@@ -108,7 +109,7 @@ for i in range(n):
 		ax1.plot((x2+x1)/2.,(y2+y1)/2., color = 'green', marker = '.')
 plt.tight_layout()
 plt.grid()
-plt.show()
+plt.savefig("firstMethod.pdf")
 
 
 print "Probability of first method: ",count/float(n)
@@ -161,7 +162,7 @@ for i in range(n):
 
 plt.tight_layout()
 plt.grid()
-plt.show()
+plt.savefig("secondMethod.pdf")
 
 print "Probability of second method: ",float(count)/float(n)
 	
@@ -218,6 +219,6 @@ for i in range(n):
 
 plt.tight_layout()
 plt.grid()
-plt.show()
+plt.savefig("thirdMethod.pdf")
 
 print "Probability of third method: ",float(count)/float(n)		

@@ -8,7 +8,6 @@ def bisection(x1,x2,cut):
     i=0
     while i<=100:
         x = (x1+x2)/2.0
-        print "x1="+str(x1)+" ; x2="+str(x2)+" ; x="+str(x)+" ; f(x)="+str(func(x))
         if (func(x)==0 or abs(x1-x2)/2.0<=cut):
             break
         else:
@@ -19,5 +18,9 @@ def bisection(x1,x2,cut):
                 x2 = x
     return x
 
+# all roots:
 
-print bisection(0.,4.,0.00001)
+print "first root", bisection(-20.,-10.,0.00001)
+print "second root", bisection(-5.,0.,0.00001)
+print "third root", bisection(0.,5.,0.00001)
+print "fourth root", bisection(5.,10.,0.00001)

@@ -39,7 +39,12 @@ def brent(f,start,end,accuracy):
 				b=x_quadr
 				
 		else:
-			x_bisection=(a+c)/2.
+			if(a==b):
+				x_bisection=(a+c)/2.
+			elif(a==c):
+				x_bisection=(a+b)/2.
+			else:
+				x_bisection=(b+c)/2.
 			
 			if(f(x_bisection)*f(c)>0.):
 				a=b

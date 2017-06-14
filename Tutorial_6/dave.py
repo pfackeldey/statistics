@@ -1,6 +1,6 @@
 import numpy as np
 
-def func2(x, param):
+def func(x, param):
 	f = 0.
 	
 	for i in xrange(len(param)):
@@ -9,7 +9,7 @@ def func2(x, param):
 	return f
 
 
-def func(x,param):
+def func2(x,param):
 	y=0.
 	y=pow(x,4.)/300. + pow(x,3.)/50. -pow(x,2.)/3. +x/10. + 5./2.
 	#~ return (x**4)/300. + (x**3)/50. - (x**2)/3. + x/10. +5./2.
@@ -21,6 +21,8 @@ def func(x,param):
 
 	
 def brent(func, param, a_ini, c_ini):
+
+	print a_ini,c_ini
 
 	root = 0.	
 	accuracy = 10**(-5)
@@ -45,15 +47,15 @@ def brent(func, param, a_ini, c_ini):
 		x_bs = (a+c)/2.
 		x_qi = b + P/Q
 		
-		print "----------------------"	
-		print "1",func(x_qi,param)
-		print func2(x_qi,param)
-		print "2",func(c,param)
-		print func2(c,param)
-		print "3",func(x_bs,param)
-		print func2(x_bs,param)
+		#~ print "----------------------"	
+		#~ print "1",func(x_qi,param)
+		#~ print func2(x_qi,param)
+		#~ print "2",func(c,param)
+		#~ print func2(c,param)
+		#~ print "3",func(x_bs,param)
+		#~ print func2(x_bs,param)
 		
-		print "a,b",a,b
+		#~ print "a,b,c",a,b,c
 		
 		if(abs(func(x_qi, param)) <= abs(func(x_bs, param))):
 			if(func(x_qi, param)*func(c, param) > 0.):
@@ -75,8 +77,8 @@ def brent(func, param, a_ini, c_ini):
 				b = x_bs
 
 
-		print "4",func(b,param)
-		print func2(b,param)
+		#~ print "4",func(b,param)
+		#~ print func2(b,param)
 
 		if(abs(a-b)<=accuracy or abs(b-c)<=accuracy):
 			#~ if(func(b, param)==0):
@@ -85,6 +87,9 @@ def brent(func, param, a_ini, c_ini):
 				missing_root = 0
 		
 			else:
+				if(abs(a-c)<=accuracy):
+					P=(c-b)*S
+					Q=1-S
 				if(abs(a-b)<=accuracy):
 					b = (b+c)/2.
 
@@ -113,18 +118,12 @@ def main():
 	b = 20.
 	n = 20
 
-	print "1",func(1.1111111111111111111,coefficients)
-	print "2",func2(1.1111111111111111111,coefficients)
 
-	ar=np.linspace(-100.,100.,1000000)
-
-	#~ for i in ar:
-		#~ if abs(func(i,coefficients)-func2(i,coefficients)):
-			#~ print "error",i,func(i,coefficients),func2(i,coefficients)
-			#~ print func(i,coefficients)-func2(i,coefficients)
 
 	for i in xrange(n):
 		root = brent(func, coefficients, a+i*(abs(b-a))/n, b - (n-1-i)*(abs(b-a))/n)
+		
+		
 
 		if(root[0]):
 			roots = np.append(roots, root[0])

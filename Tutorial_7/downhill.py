@@ -45,22 +45,12 @@ beta = 0.5
 sigma = 0.5
 #Initialize instance of Class DownhillSimplex:
 downhill = DownhillSimplex()
-print downhill.sort()
-print downhill.midpoint()
-print downhill.reflection()
-print downhill.expansion()
 
 values = downhill.sort()
-print values[-1]
-print values[0][1]
-print values[0][2]
-print values.shape[0]
+mid = downhill.midpoint()
+print values
 
-i=0
-
-while(i<3):
-    mid = downhill.midpoint()
-    values = downhill.sort()
+while(abs(function(*values[0][1:])-function(*values[1][1:]))>1e-6):
     if function(*mid)<function(*values[0][1:]):
         expanded = downhill.expansion()
         values[-1][1] = expanded[0] if function(*expanded)<function(*mid) else mid[0]
@@ -76,5 +66,11 @@ while(i<3):
     for i in range(values.shape[0]):
         values[i][1] = sigma*values[0][1] + (1.-sigma)*values[i][1]
         values[i][2] = sigma*values[0][2] + (1.-sigma)*values[i][2]
-    i=i+1
+    listoftuple = np.zeros((10,2))
+    for i in range(listoftuple.shape[0]):
+        listoftuple[i][0] = values[i][1]
+        listoftuple[i][1] = values[i][2]
+    downhill_update = DownhillSimplex()
+    values = downhill_update.sort()
+    mid = downhill_update.midpoint()
     print values

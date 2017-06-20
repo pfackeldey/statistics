@@ -20,7 +20,7 @@ class DownhillSimplex():
 
     def midpoint(self):
         self.values = self.values[:self.values.shape[0]-1,:]
-        self.mid = [np.mean(self.values[:,i]) for i in range(1,self.values.shape[1])]
+        self.mid = [np.mean(self.values[:-1,i]) for i in range(1,self.values.shape[1])]
         return self.mid
 
     def reflection(self):
@@ -48,7 +48,7 @@ downhill = DownhillSimplex()
 values = downhill.sort()
 print values
 
-while(abs(function(*values[0][1:])-function(*values[1][1:]))>1e-5):
+for j in range(50):
     values = downhill.sort()
     mid = downhill.midpoint()
     reflection = downhill.reflection()
@@ -63,6 +63,7 @@ while(abs(function(*values[0][1:])-function(*values[1][1:]))>1e-5):
             listoftuple[i][0] = values[i][1]
             listoftuple[i][1] = values[i][2]
         downhill = DownhillSimplex()
+        print "a"
         continue
     elif function(*reflection)<function(*values[-2][1:]):
         values[-1][1] = reflection[0]
@@ -72,6 +73,7 @@ while(abs(function(*values[0][1:])-function(*values[1][1:]))>1e-5):
             listoftuple[i][0] = values[i][1]
             listoftuple[i][1] = values[i][2]
         downhill = DownhillSimplex()
+        print "b"
         continue
     elif function(*contracted)<function(*values[-1][1:]):
         values[-1][1] = contracted[0]
@@ -81,6 +83,7 @@ while(abs(function(*values[0][1:])-function(*values[1][1:]))>1e-5):
             listoftuple[i][0] = values[i][1]
             listoftuple[i][1] = values[i][2]
         downhill = DownhillSimplex()
+        print "c"
         continue
     else:
         for i in range(values.shape[0]):
@@ -91,5 +94,6 @@ while(abs(function(*values[0][1:])-function(*values[1][1:]))>1e-5):
             listoftuple[i][0] = values[i][1]
             listoftuple[i][1] = values[i][2]
         downhill = DownhillSimplex()
+        print "d"
         continue
-    print values
+print values

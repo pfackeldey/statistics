@@ -45,37 +45,51 @@ beta = 0.5
 sigma = 0.5
 #Initialize instance of Class DownhillSimplex:
 downhill = DownhillSimplex()
-
 values = downhill.sort()
-mid = downhill.midpoint()
-reflection = downhill.reflection()
-expanded = downhill.expansion()
-h = reflection if function(*reflection)<function(*values[-1][1:]) else values[-1][1:]
-contracted = downhill.contraction(h)
 print values
 
 while(abs(function(*values[0][1:])-function(*values[1][1:]))>1e-5):
+    values = downhill.sort()
+    mid = downhill.midpoint()
+    reflection = downhill.reflection()
+    expanded = downhill.expansion()
+    h = reflection if function(*reflection)<function(*values[-1][1:]) else values[-1][1:]
+    contracted = downhill.contraction(h)
     if function(*reflection)<function(*values[0][1:]):
-        values[-1][1] = expanded[0] if function(*expanded)<function(*mid) else reflection[0]
-        values[-1][2] = expanded[1] if function(*expanded)<function(*mid) else reflection[1]
+        values[-1][1] = expanded[0] if function(*expanded)<function(*reflection) else reflection[0]
+        values[-1][2] = expanded[1] if function(*expanded)<function(*reflection) else reflection[1]
+        listoftuple = np.zeros((3,2))
+        for i in range(listoftuple.shape[0]):
+            listoftuple[i][0] = values[i][1]
+            listoftuple[i][1] = values[i][2]
+        downhill = DownhillSimplex()
+        continue
     elif function(*reflection)<function(*values[-2][1:]):
         values[-1][1] = reflection[0]
         values[-1][2] = reflection[1]
+        listoftuple = np.zeros((3,2))
+        for i in range(listoftuple.shape[0]):
+            listoftuple[i][0] = values[i][1]
+            listoftuple[i][1] = values[i][2]
+        downhill = DownhillSimplex()
+        continue
+    elif function(*contracted)<function(*values[-1][1:]):
+        values[-1][1] = contracted[0]
+        values[-1][2] = contracted[1]
+        listoftuple = np.zeros((3,2))
+        for i in range(listoftuple.shape[0]):
+            listoftuple[i][0] = values[i][1]
+            listoftuple[i][1] = values[i][2]
+        downhill = DownhillSimplex()
+        continue
     else:
-        values[-1][1] = contracted[0] if function(*contracted)<function(*values[-1][1:]) else values[-1][1]
-        values[-1][2] = contracted[1] if function(*contracted)<function(*values[-1][1:]) else values[-1][2]
-    for i in range(values.shape[0]):
-        values[i][1] = sigma*values[0][1] + (1.-sigma)*values[i][1]
-        values[i][2] = sigma*values[0][2] + (1.-sigma)*values[i][2]
-    listoftuple = np.zeros((3,2))
-    for i in range(listoftuple.shape[0]):
-        listoftuple[i][0] = values[i][1]
-        listoftuple[i][1] = values[i][2]
-    downhill_update = DownhillSimplex()
-    values = downhill_update.sort()
-    mid = downhill_update.midpoint()
-    reflection = downhill_update.reflection()
-    expanded = downhill_update.expansion()
-    h = reflection if function(*reflection)<function(*values[-1][1:]) else values[-1][1:]
-    contracted = downhill_update.contraction(h)
+        for i in range(values.shape[0]):
+            values[i][1] = sigma*values[0][1] + (1.-sigma)*values[i][1]
+            values[i][2] = sigma*values[0][2] + (1.-sigma)*values[i][2]
+        listoftuple = np.zeros((3,2))
+        for i in range(listoftuple.shape[0]):
+            listoftuple[i][0] = values[i][1]
+            listoftuple[i][1] = values[i][2]
+        downhill = DownhillSimplex()
+        continue
     print values

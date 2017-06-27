@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+import scipy.stats as st
 
 data = np.loadtxt("data.dat", skiprows=1)
 
@@ -51,6 +52,8 @@ for i in range(1,len(R)):
 
 r_mean = 1.+(2.*R.count("A")*R.count("B"))/len(R)
 r_var = (2.*R.count("A")*R.count("B")*(2.*R.count("A")*R.count("B")-len(R)))/(len(R)**2. *(len(R)-1))
+Z=(r-r_mean)/np.sqrt(r_var)
+p=1.-st.norm.pdf(Z)
 print "runs: ", r
 
 print "N_A: ", R.count("A")
@@ -60,4 +63,6 @@ print "expected <r>: ", r_mean
 print
 print "variance r: ", r_var
 print
-print "Z-Score of r: ", (r-r_mean)/r_var
+print "Z-Score of r: ", Z
+print
+print "p-value: ", p

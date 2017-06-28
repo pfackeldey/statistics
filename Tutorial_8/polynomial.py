@@ -53,7 +53,7 @@ for i in range(1,len(R)):
 r_mean = 1.+(2.*R.count("A")*R.count("B"))/len(R)
 r_var = (2.*R.count("A")*R.count("B")*(2.*R.count("A")*R.count("B")-len(R)))/(len(R)**2. *(len(R)-1))
 Z=(r-r_mean)/np.sqrt(r_var)
-p=1.-st.norm.pdf(Z)
+p=1.-2.*st.norm.pdf(Z)
 print "runs: ", r
 
 print "N_A: ", R.count("A")

@@ -14,6 +14,7 @@
 #include <TLegend.h>
 #include <TString.h>
 #include <TGraph.h>
+#include <string>
 
 #include <RooRealVar.h>
 #include <RooAddPdf.h>
@@ -25,13 +26,20 @@
 #include <RooPlot.h>
 #include "RooConstVar.h"
 #include "RooWorkspace.h"
+#include <fstream>
 
 using namespace std;
 
 using namespace RooFit;
 
-
-
+#include <sstream>
+template <typename T>  // for old c++ versions...
+  std::string to_string ( T Number )
+  {
+     std::ostringstream ss;
+     ss << Number;
+     return ss.str();
+}
 
 
 
